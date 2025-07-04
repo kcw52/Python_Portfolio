@@ -2377,3 +2377,169 @@ help(offset_mean)
         
         >>> Offset_mean([1,2,3], 0)
         array([-1., 0., 1.])
+
+## Defensive Programming
+In this analysis, we looked at defensive programming strategies. 
+
+```python
+numbers = [1.5, 2.3, 0.7, -0.001, 4.4]
+total = 0.0
+for num in numbers:
+    assert num > 0.0, 'Data should only contain positive values'
+    total += num
+print('total is:', total)
+```
+    ---------------------------------------------------------------------------
+
+    AssertionError                            Traceback (most recent call last)
+
+    <ipython-input-4-13c7d5640ddd> in <module>
+          2 total = 0.0
+          3 for num in numbers:
+    ----> 4     assert num > 0.0, 'Data should only contain positive values'
+          5     total += num
+          6 print('total is:', total)
+
+
+    AssertionError: Data should only contain positive values
+
+```python
+def normalize_rectangle(rect):
+    """"Normalizes a rectangle so that it is at the orgin and 1.0 units
+    long on its longest axis. Input hsould be of the format (x0, y0, x1, y1).
+    (x0, y0) and (x1, y1) define the lower left and upper right corners of 
+    the rectangle respectively. """
+       
+    assert len(rect) == 4, 'Rectangles must contain 4 coordinates'
+    x0, y0,x1,y1 = rect
+    assert x0 < x1, 'Invalid X coordinates'
+    assert y0 < y1, 'Invalid Y coordinates'
+    
+    dx = x1 - x0
+    dy = y1 - y0
+    
+    if dx > dy:
+        scaled = dy / dx
+        upper_x, upper_y = 1.0, scaled
+        
+    else:
+        scaled = dx / dy
+        upper_x, upper_y = scaled, 1.0
+        
+    assert 0 < upper_x <= 1.0, 'Calculated upper x coordinate invalid'
+    assert 0 < upper_y <= 1.0, 'Calculated upper y coordinate invalid'
+    
+    return (0, 0, upper_x, upper_y)
+```
+
+```python
+print(normalize_rectangle(0.0, 1.0, 2.0))
+```
+
+    ---------------------------------------------------------------------------
+
+    TypeError                                 Traceback (most recent call last)
+
+    <ipython-input-18-07e1bfd52af7> in <module>
+    ----> 1 print(normalize_rectangle(0.0, 1.0, 2.0))
+    
+
+    TypeError: normalize_rectangle() takes 1 positional argument but 3 were given
+
+```python
+print(normalize_rectangle((4.0, 2.0, 1.0, 5.0)))
+```
+
+    ---------------------------------------------------------------------------
+
+    AssertionError                            Traceback (most recent call last)
+
+    <ipython-input-19-5e28a32bada1> in <module>
+    ----> 1 print(normalize_rectangle((4.0, 2.0, 1.0, 5.0)))
+  
+
+    <ipython-input-17-7366c9667777> in normalize_rectangle(rect)
+          7     assert len(rect) == 4, 'Rectangles must contain 4 coordinates'
+          8     x0, y0,x1,y1 = rect
+    ----> 9     assert x0 < x1, 'Invalid X coordinates'
+         10     assert y0 < y1, 'Invalid Y coordinates'
+         11 
+
+    AssertionError: Invalid X coordinates
+
+```python
+print(normalize_rectangle((0.0, 0.0, 1.0, 5.0)))
+```
+
+    (0, 0, 0.2, 1.0)
+
+```python
+print(normalize_rectangle((0.0, 0.0, 5.0, 1.0)))
+```
+
+    (0, 0, 1.0, 0.2)
+
+## Transcribing DNA into RNA
+In this analysis, we looked at using a gene's FASTA to transcribe DNA into RNA.
+
+```python
+# Prompt the user to enter the input fasta file name
+
+input_file_name = input("Enter the name of the input fasta file")
+```
+
+    Enter the name of the input fasta file SUMO.txt
+
+
+
+```python
+# Open the input fasta file and read the DNA sequence
+
+with open(input_file_name, "r") as input_file:
+    dna_sequence = ""
+    for line in input_file:
+        if line.startswith(">"):
+            continue
+        dna_sequence += line.strip()
+```
+
+
+```python
+# Transcribe the DNA to RNA
+rna_sequence = ""
+for nucleotide in dna_sequence:
+    if nucleotide =="T":
+        rna_sequence += "U"
+    else:
+        rna_sequence += nucleotide
+```
+
+
+```python
+# Prompt the user to enter the output file name
+
+output_file_name = input("Enter the name of the output file:")
+```
+
+    Enter the name of the output file: Ubiquitin
+
+
+
+```python
+# Save the RNA sequence to a text file
+
+with open(output_file_name, "w") as output_file:
+    output_file.write(rna_sequence)
+    print("The RNA sequence has been saved to {output_file_name}")
+```
+
+    The RNA sequence has been saved to {output_file_name}
+
+
+
+```python
+print(rna_sequence)
+```
+
+    AUGUCUGACGAAAAGAAGGGAGGUGAGACCGAGCACAUCAACCUGAAGGUCCUCGGCCAGGACAACGCCGUCGUCCAGUUCAAGAUCAAGAAGCACACACCCUUGAGGAAGCUGAUGAACGCCUACUGCGACCGUGCCGGACUCUCCAUGCAGGUGGUGCGCUUCCGUUUCGACGGACAGCCCAUCAACGAGAACGACACUCCGACCUCGCUGGAGAUGGAGGAGGGCGACACCAUCGAGGUUUACCAGCAGCAGACUGGUGGCGCUCCAUAAAUGUCUGACGAAAAGAAGGGAGGUGAGACCGAGCACAUCAACCUGAAGGUCCUCGGCCAGGACAACGCCGUCGUCCAGUUCAAGAUCAAGAAGCACACACCCUUGAGGAAGCUGAUGAACGCCUACUGCGACCGUGCCGGACUCUCCAUGCAGGUGGUGCGCUUCCGUUUCGACGGACAGCCCAUCAACGAGAACGACACUCCGACCUCGCUGGAGAUGGAGGAGGGCGACACCAUCGAGGUUUACCAGCAGCAGACUGGUGGCGCUCCAUAA
+
