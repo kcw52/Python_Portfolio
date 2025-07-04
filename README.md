@@ -1906,7 +1906,7 @@ print_temperatures()
     Temperature in Fahrenheit was: 212.0
     Temperature in Kelvin was: 373.15
 
-## Functions 2/3
+### Functions 2/3
 
 ```python
 import numpy
