@@ -1,7 +1,7 @@
 # Canerday_Python_Portfolio
 This is the portfolio of Python code that I learned during the Summer 2025 course.
 
-## Using Jupyter Notebooks
+## Using Jupyter Notebooks (1 and 2)
 In this analysis, we learned the basics of using Juptyer notebooks in Python
 ```python
 %matplotlib inline
@@ -624,7 +624,7 @@ print('weight in kilograms is now:', weight_kg)
 
 
     
-## Analyzing Patient Data
+## Analyzing Data (1,2, and 3)
 In this analysis, we looked at inflammation data for multiple patients
 ```python
 import numpy
@@ -1898,7 +1898,7 @@ print_temperatures()
     Temperature in Fahrenheit was: 212.0
     Temperature in Kelvin was: 373.15
 
-### Functions 2/3
+### Functions 2, 3, and 4
 
 ```python
 import numpy
