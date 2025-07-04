@@ -1696,3 +1696,70 @@ fig.tight_layout()
 
 
 ![png](output_18_0.png)
+
+
+## Making Choices
+In this analysis, we looked at how Python can be leveraged into making choices
+
+```python
+import numpy
+```
+
+
+```python
+data = numpy.loadtxt(fname = 'inflammation-01.csv', delimiter = ',')
+```
+
+
+```python
+max_inflammation_0 = numpy.amax(data, axis=0)[0]
+```
+
+
+```python
+max_inflammation_20 = numpy.amax(data, axis=0)[20]
+
+if max_inflammation_0 == 0 and max_inflammation_20 == 20:
+    print('Saspictious looking maxima!')
+```
+
+    Saspictious looking maxima!
+
+
+
+```python
+max_inflammation_20 = numpy.amax(data, axis=0)[20]
+
+if max_inflammation_0 == 0 and max_inflammation_20 == 20:
+    print('Saspictious looking maxima!')
+    
+elif numpy.sum(numpy.amin(data, axis = 0)) == 0:
+    print('Mininma add up to zero!')
+    
+else:
+    print('Seems OK!')
+```
+
+    Saspictious looking maxima!
+
+
+
+```python
+data = numpy.loadtxt(fname = 'inflammation-03.csv', delimiter = ',')
+
+max_inflammation_0 = numpy.amax(data, axis=0)[0]
+
+max_inflammation_20 = numpy.amax(data, axis=0)[20]
+
+if max_inflammation_0 == 0 and max_inflammation_20 == 20:
+    print('Saspictious looking maxima!')
+    
+elif numpy.sum(numpy.amin(data, axis = 0)) == 0:
+    print('Mininma add up to zero!-> HEALTHY PARTICIPANT ALERT!')
+    
+else:
+     print('Seems OK!')
+```
+
+    Mininma add up to zero!-> HEALTHY PARTICIPANT ALERT!
+
