@@ -1,2 +1,2 @@
-# Python_Portfolio
-This is the portfolio of python code that I learned during the summer 2025 course.
+# Canerday_Python_Portfolio
+This is the portfolio of Python code that I learned during the Summer 2025 course.
