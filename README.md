@@ -10,20 +10,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns 
 sns.set(style = "darkgrid")
 ```
-
-
 ```python
 df = pd.read_csv('/home/student/Desktop/classroom/myfiles/notebooks/fortune500.csv')
 ```
-
-
 ```python
 df.head()
 ```
-
-
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
